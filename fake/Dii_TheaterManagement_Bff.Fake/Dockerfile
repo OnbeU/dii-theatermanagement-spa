@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["Dii_TheaterManagement_Bff.Fake.csproj", "."]
-RUN dotnet restore "./Dii_TheaterManagement_Bff.Fake.csproj"
+COPY ["fake/Dii_TheaterManagement_Bff.Fake/Dii_TheaterManagement_Bff.Fake.csproj", "fake/Dii_TheaterManagement_Bff.Fake/"]
+RUN dotnet restore "fake/Dii_TheaterManagement_Bff.Fake/Dii_TheaterManagement_Bff.Fake.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/fake/Dii_TheaterManagement_Bff.Fake"
 RUN dotnet build "Dii_TheaterManagement_Bff.Fake.csproj" -c Release -o /app/build
 
 FROM build AS publish
