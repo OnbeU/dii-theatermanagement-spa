@@ -30,6 +30,7 @@ jobs:
 #     with: 
 #       PACT_BROKER_BASE_URL: ''
 #       PACT_BROKER_TOKEN: ''
+
     
     - name: 'Build and Deploy Apps'
       id:  publishapp
