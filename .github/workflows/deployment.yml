@@ -51,7 +51,7 @@ jobs:
       name: 'Create github pr comment and deployment'
       with:
         script: |
-            if [ "${{ github.event_name }}" == "pull_request" ]; then
+            if [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.action }}" != "closed" ]]; then
                 await github.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
