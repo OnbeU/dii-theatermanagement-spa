@@ -35,6 +35,7 @@ namespace Dii_TheaterManagement_Bff.Fake
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddHealthChecks();
             // Allow a JWT bearer token but do not validate it.
             services.AddAuthentication(o =>
             {
@@ -142,6 +143,7 @@ namespace Dii_TheaterManagement_Bff.Fake
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/hc");
             });
         }
     }
