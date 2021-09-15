@@ -25,11 +25,12 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-#   - name: 'Run Dotnet Tests'
-#     uses: OnbeUStudent/devopssetup/actions/dotnettest@master
-#     with: 
-#       PACT_BROKER_BASE_URL: ''
-#       PACT_BROKER_TOKEN: ''
+    - name: 'Run SPA Tests'
+      uses: OnbeUStudent/devopssetup/actions/spatest@master
+      with: 
+        PACT_BROKER_BASE_URL: 'https://onbe.pactflow.io'
+        PACT_BROKER_TOKEN: '4pYBeAABs7e_1rTC98q07w'
+        PACT_PACTICIPANT: 'dii-theatermanagement-spa'
 
     
     - name: 'Build and Deploy Apps'
