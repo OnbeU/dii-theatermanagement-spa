@@ -30,6 +30,7 @@ jobs:
 #     with: 
 #       PACT_BROKER_BASE_URL: ''
 #       PACT_BROKER_TOKEN: ''
+
     
     - name: 'Build and Deploy Apps'
       id:  publishapp
@@ -50,11 +51,11 @@ jobs:
       name: 'Create github pr comment and deployment'
       with:
         script: |
-            if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            if [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.action }}" != "closed" ]]; then
                 await github.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: "Review this PR here - https://${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
+                body: "Review PR here - https://${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
                 })
             fi

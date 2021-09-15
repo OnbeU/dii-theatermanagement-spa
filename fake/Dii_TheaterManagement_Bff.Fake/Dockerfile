@@ -7,7 +7,6 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["fake/Dii_TheaterManagement_Bff.Fake/Dii_TheaterManagement_Bff.Fake.csproj", "fake/Dii_TheaterManagement_Bff.Fake/"]
-COPY ["tobenuget/Common/Common.csproj", "tobenuget/Common/"]
 RUN dotnet restore "fake/Dii_TheaterManagement_Bff.Fake/Dii_TheaterManagement_Bff.Fake.csproj"
 COPY . .
 WORKDIR "/src/fake/Dii_TheaterManagement_Bff.Fake"
