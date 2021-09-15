@@ -19,18 +19,23 @@ jobs:
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v2
-      
+
+    - name: Use Node.js 16.6.1
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16.6.1
+    
+    - name: 'Run SPA Tests and Contracts'
+      uses: OnbeUStudent/devopssetup/actions/spatest@master
+      with: 
+        PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+        PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+        PACT_PACTICIPANT: 'dii-theatermanagement-spa'
+    
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-#   - name: 'Run Dotnet Tests'
-#     uses: OnbeUStudent/devopssetup/actions/dotnettest@master
-#     with: 
-#       PACT_BROKER_BASE_URL: ''
-#       PACT_BROKER_TOKEN: ''
-
     
     - name: 'Build and Deploy Apps'
       id:  publishapp
@@ -58,7 +63,6 @@ jobs:
                 repo: context.repo.repo,
                 body: "Review PR here - https://${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
                 })
-  
-            
+                  
 
            
