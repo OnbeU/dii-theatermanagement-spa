@@ -20,10 +20,10 @@ jobs:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v2
       
-    - name: 'Login via Azure CLI'
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+#    - name: 'Login via Azure CLI'
+#      uses: azure/login@v1
+#      with:
+#        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
 #   - name: 'Run Dotnet Tests'
 #     uses: OnbeUStudent/devopssetup/actions/dotnettest@master
@@ -32,20 +32,20 @@ jobs:
 #       PACT_BROKER_TOKEN: ''
 
     
-    - name: 'Build and Deploy Apps'
-      id:  publishapp
-      uses: OnbeUStudent/devopssetup/actions/spadeploy@master
-      with: 
-        APP_NAME: ${{ env.APP_NAME}}
-        REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-        REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-        STAGE_SITE_AKS_NAME: ${{ secrets.STAGE_SITE_AKS_NAME }}
-        STAGE_SITE_AKS_RESOURCE_GROUP: ${{ secrets.STAGE_SITE_AKS_RESOURCE_GROUP }}
-        PROD_SITE_AKS_NAME: ${{ secrets.STAGE_SITE_AKS_NAME }}
-        PROD_SITE_AKS_RESOURCE_GROUP: ${{ secrets.STAGE_SITE_AKS_RESOURCE_GROUP }}
-        PROD_BFF_URL: ${{ secrets.PROD_BFF_URL }}
-        HOST_NAME: ${{ secrets.HOST_URL }}
+#   - name: 'Build and Deploy Apps'
+#     id:  publishapp
+#     uses: OnbeUStudent/devopssetup/actions/spadeploy@master
+#     with: 
+#       APP_NAME: ${{ env.APP_NAME}}
+#       REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+#       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+#       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+#       STAGE_SITE_AKS_NAME: ${{ secrets.STAGE_SITE_AKS_NAME }}
+#       STAGE_SITE_AKS_RESOURCE_GROUP: ${{ secrets.STAGE_SITE_AKS_RESOURCE_GROUP }}
+#       PROD_SITE_AKS_NAME: ${{ secrets.STAGE_SITE_AKS_NAME }}
+#       PROD_SITE_AKS_RESOURCE_GROUP: ${{ secrets.STAGE_SITE_AKS_RESOURCE_GROUP }}
+#       PROD_BFF_URL: ${{ secrets.PROD_BFF_URL }}
+#       HOST_NAME: ${{ secrets.HOST_URL }}
     
     - uses: actions/github-script@v4
       name: 'Create github pr comment and deployment'
