@@ -49,10 +49,7 @@ jobs:
     
     - uses: actions/github-script@v4
       name: 'Create github pr comment and deployment'
-      if: |
-          ${{ github.event_name == 'pull_request'
-                 && github.event.action != 'closed'
-                }}
+      if: github.event_name == 'pull_request' && github.event.action != 'closed'
       with:
         script: |
             echo  "Review PR here - https://${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
