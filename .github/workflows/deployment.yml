@@ -25,7 +25,7 @@ jobs:
       with:
         node-version: 16.6.1
     
-    - name: 'Run SPA Tests'
+    - name: 'Run SPA Tests and Contracts'
       uses: OnbeUStudent/devopssetup/actions/spatest@master
       with: 
         PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
