@@ -16,19 +16,17 @@ jobs:
     name: Deployment Pipeline
     runs-on: ubuntu-latest
     
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 16.6.1
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    
+        node-version: 16.6.1
+    - name: npm dependencies
+      run: npm install 
+      
     - name: run on linux
       run: |
         npm run test-headless
