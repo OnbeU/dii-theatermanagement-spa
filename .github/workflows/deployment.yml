@@ -50,8 +50,8 @@ jobs:
     - name: Run  Test
       shell: bash
       run: | 
-          comment="Review PR here - ${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
-            echo $comment   
+          comment="Review PR here - https://${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
+          echo $comment   
   
             
 
