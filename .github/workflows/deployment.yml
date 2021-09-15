@@ -47,13 +47,12 @@ jobs:
         PROD_BFF_URL: ${{ secrets.PROD_BFF_URL }}
         HOST_NAME: ${{ secrets.HOST_URL }}
     
-    - uses: actions/github-script@v4
-      name: 'Create github pr comment and deployment'
-      if: github.event_name == 'pull_request' && github.event.action != 'closed'
-      with:
-        script: |
-            comment="Review PR here - ${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
-            echo $comment
+    - name: Run  Test
+      shell: bash
+      run: | 
+          comment="Review PR here - ${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
+            echo $comment   
+  
             
 
            
