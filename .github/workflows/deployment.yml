@@ -44,18 +44,15 @@ jobs:
         STAGE_SITE_AKS_RESOURCE_GROUP: ${{ secrets.STAGE_SITE_AKS_RESOURCE_GROUP }}
         PROD_SITE_AKS_NAME: ${{ secrets.STAGE_SITE_AKS_NAME }}
         PROD_SITE_AKS_RESOURCE_GROUP: ${{ secrets.STAGE_SITE_AKS_RESOURCE_GROUP }}
-        PROD_BFF_URL: ''
+        PROD_BFF_URL: ${{ secrets.PROD_BFF_URL }}
         HOST_NAME: ${{ secrets.HOST_URL }}
     
-    - uses: actions/github-script@v4
-      name: 'Create github pr comment and deployment'
-      with:
-        script: |
-            if [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.action }}" != "closed" ]]; then
-                await github.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: "Review PR here - https://${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
-                })
-            fi
+    - name: Run  Test
+      shell: bash
+      run: | 
+          comment="Review PR here - ${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
+            echo $comment   
+  
+            
+
+           
