@@ -16,22 +16,30 @@ jobs:
     name: Deployment Pipeline
     runs-on: ubuntu-latest
     
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v2
-      
-    - name: 'Login via Azure CLI'
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
     - name: 'Run SPA Tests'
       uses: OnbeUStudent/devopssetup/actions/spatest@master
       with: 
         PACT_BROKER_BASE_URL: 'https://onbe.pactflow.io'
         PACT_BROKER_TOKEN: '4pYBeAABs7e_1rTC98q07w'
         PACT_PACTICIPANT: 'dii-theatermanagement-spa'
-
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - name: 'Build and Deploy Apps'
       id:  publishapp
