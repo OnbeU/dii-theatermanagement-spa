@@ -10,7 +10,8 @@ on:
   workflow_dispatch:
 
 env:
-  APP_NAME: Dii_TheaterManagement_Spa
+  APP_NAME: 'Dii_TheaterManagement_Spa'
+  PACT_PACTICIPANT: 'dii-theatermanagement-spa'
 jobs:
   build:
     name: Deployment Pipeline
@@ -30,7 +31,7 @@ jobs:
       with: 
         PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
         PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
-        PACT_PACTICIPANT: 'dii-theatermanagement-spa'
+        PACT_PACTICIPANT: '${{ env.PACT_PACTICIPANT }}'
     
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
@@ -63,3 +64,6 @@ jobs:
                 repo: context.repo.repo,
                 body: "Review PR here - https://${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
                 })
+                  
+
+           
